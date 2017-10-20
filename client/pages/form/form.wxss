@@ -1,0 +1,4 @@
+/* pages/form/form.wxss */
+.test{
+	border-bottom: 1rpx solid lightgray
+}

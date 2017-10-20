@@ -1,0 +1,44 @@
+<import src="../../plugins/zanui-weapp/dist/toptips/index.wxml" />
+<view class='page'>
+  <view class='page__bd'>
+
+
+    <radio-group bindchange="handleRadioChange">
+      <view class='weui-cells' wx:for='{{props.schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
+
+        <!-- 日期 -->
+        <view class="weui-cell">
+          <view class="weui-cell__bd">{{dateAndTime.date}}</view>
+        </view>
+
+        <!-- 时间段 -->
+        <label class="weui-cell weui-check__label" wx:for="{{dateAndTime.timeBlocks}}" wx:key='start' wx:for-item='timeBlock' wx:for-index='timeBlockIndex' data-date-and-time-index='{{dateAndTimeIndex}}' data-time-block-index='{{timeBlockIndex}}'>
+          <radio class="weui-check" value="{{dateAndTimeIndex+','+timeBlockIndex}}" checked="{{props.checkIdx1==dateAndTimeIndex && props.checkIdx2==timeBlockIndex}}" />
+          <!-- 时间 -->
+          <view class="weui-cell__bd">{{timeBlock.start}}--{{timeBlock.end}}</view>
+          <!-- 付款图标 -->
+          <image wx:if='{{timeBlock.userInfo.paid==true}}' src='../../resources/payment_card.png' mode='aspectFit' style="width: 32rpx; height: 32rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+          <!-- 头像 -->
+          <image wx:if='{{timeBlock.userInfo != null}}' src="{{timeBlock.userInfo.avatarUrl}}" mode='aspectFit' style="width: 90rpx; height: 90rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+          <!-- 名字 -->
+          <view class='weui-cell__hd' wx:if='{{timeBlock.userInfo != null}}'>{{timeBlock.userInfo.nickName}}</view>
+          <!-- 选择图标  -->
+          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{props.checkIdx1==dateAndTimeIndex && props.checkIdx2==timeBlockIndex}}">
+            <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+          </view>
+        </label>
+      </view>
+    </radio-group>
+
+
+
+    <!-- 按钮 -->
+    <view class="page__bd_spacing" style='margin-top:100rpx'>
+      <button bindtap='handleBtnTap' class='weui-btn' type='primary'>确定</button>
+    </view>
+
+  </view>
+</view>
+
+<!-- 错误提示 -->
+<template is="zan-toptips" data="{{ zanTopTips }}"></template>

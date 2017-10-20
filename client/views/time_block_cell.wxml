@@ -1,0 +1,14 @@
+<template name='time-block-cell'>
+  <!-- 开始时间 -->
+  <view class="weui-label">开始时间</view>
+  <picker bindchange="handleStartTimeChange" value="{{start}}" mode='time' data-time-block-index='{{timeBlockIndex}}' data-date-and-time-index='{{dateAndTimeIndex}}'>
+    <view class="weui-select weui-select_in-select-after">{{start}}</view>
+  </picker>
+
+
+  <!-- 结束时间 -->
+  <view class="weui-label">结束时间</view>
+  <picker bindchange="handleEndTimeChange" value="{{start?start:end}}" mode='time' data-time-block-index='{{timeBlockIndex}}' data-date-and-time-index='{{dateAndTimeIndex}}'>
+    <view class="weui-select weui-select_in-select-after">{{end}}</view>
+  </picker>
+</template>

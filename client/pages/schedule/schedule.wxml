@@ -1,0 +1,84 @@
+<import src='../../views/add_time_block_cell.wxml' />
+<import src='../../views/time_block_cell.wxml' />
+<import src="../../plugins/zanui-weapp/dist/quantity/index.wxml" />
+
+<view class='page'>
+  <view class='page__hd'>
+    <view class='page__title'>新建计划</view>
+    <view class='page__desc'></view>
+  </view>
+
+  <view class='page__bd'>
+    <!-- 计划标题 -->
+    <view class='weui-cells__title'>计划标题</view>
+    <view class='weui-cells weui_cells-after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__bd'>
+          <input class='weui-input' bindinput='handleTitleChanged' placeholder='请输入标题'>{{props.store.title}}</input>
+        </view>
+      </view>
+    </view>
+
+    <!-- 计划描述 -->
+    <view class='weui-cells__title'>计划描述</view>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>
+          <textarea class='weui-textarea' bindinput='handleDescriptionChanged' placeholder='请输入计划描述' style='height: 3.3em'>{{props.store.description}}</textarea>
+          <text class='weui-textarea-counter'>0/200</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 日期 -->
+    <view class='weui-cells__title'>日期</view>
+    <view class='weui-cells weui-cells_after-title'>
+      <!-- 开始日期 -->
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__bd'>
+          <picker mode='date' value='{{props.store.dateStart}}' bindchange='handleDateStartChanged'>
+            <view class='weui-select'>开始日期: {{props.store.dateStart}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <!-- 结束日期 -->
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__bd'>
+          <picker mode='date' value='{{props.store.dateEnd}}' bindchange='handleDateEndChanged'>
+            <view class='weui-select'>结束日期: {{props.store.dateEnd}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <!-- 时间段 -->
+    <view class='weui-cells__title'>时间段</view>
+    <view class='weui-cells weui-cells_after_title'>
+      <view class='weui-cell weui-cell_select' style='padding-left: 50rpx' wx:for='{{props.store.timeBlocks}}' wx:for-item='timeBlock' wx:key='{{timeBlock.start}}' wx:for-index='timeBlockIndex' bindlongpress='handleLongPressTimeBlock' data-time-block-index='{{timeBlockIndex}}'>
+        <template is='time-block-cell' data='{{timeBlockIndex,...timeBlock}}' />
+      </view>
+      <!-- 添加时间段 -->
+      <template is='add-time-block-cell' />
+    </view>
+    <view class="weui-cells__tips">长按单元格删除时间段</view>
+
+    <!-- 最大报名数 -->
+    <view class='weui-cells'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>每人限报时间段数量</view>
+        <view style='margin-right:10rpx'>
+          <template is="zan-quantity" data="{{ ...quantityItem, componentId: 'quantityItem' }}" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">选择0表示不限报名数量</view>
+
+    <!-- 按钮们 -->
+    <view class='page__bd_spacing' style='padding-top: 50rpx'>
+      <button class='weui-btn' type='primary' bindtap='handleOKBtnTap' disabled='{{!props.store.isValid}}'>预览计划</button>
+      <button class='weui-btn' type='default' bindtap='handleBackBtnTap'>返回</button>
+    </view>
+
+  </view>
+</view>

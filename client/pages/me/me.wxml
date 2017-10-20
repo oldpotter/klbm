@@ -1,0 +1,28 @@
+<!--pages/me/me.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+    <view class='user-info'>
+      <image class='avatar' src='{{userInfo ? userInfo.avatarUrl : "../../resources/default_avatar_blue.png"}}'></image>
+      <text class='name'>你好,{{userInfo.nickName}}</text>
+    </view>
+
+    <button class='btn' wx:if='{{!userInfo}}' class='weui-btn' type='default' bindtap='onClickOpenSettingPage'>打开设置页</button>
+    <view wx:else class='weui-cells list'>
+      <block wx:for='{{listItems}}'>
+        <view class='weui-cell' hover-class='weui-cell_active' bindtap='onClickCell' data-index='{{index}}'>
+          <view class='weui-cell__bd'>{{item.title}}</view>
+          <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+        </view>
+      </block>
+    </view>
+
+    <view class="weui-footer foot">
+      <view class="weui-footer__links">
+        <navigator url="" class="weui-footer__link">联系作者</navigator>
+        <navigator url="" class="weui-footer__link">捐赠作者</navigator>
+      </view>
+      <view class="weui-footer__text">Copyright © 2017 Tom.Shen</view>
+    </view>
+
+  </view>
+</view>

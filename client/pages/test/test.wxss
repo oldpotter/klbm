@@ -1,0 +1,6 @@
+.container{
+	background: lightblue;
+	width: 80%;
+	margin: 0rpx auto;
+	margin-bottom: 200rpx;
+}

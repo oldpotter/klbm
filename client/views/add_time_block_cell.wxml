@@ -1,0 +1,7 @@
+<template name='add-time-block-cell'>
+  <picker mode='time' bindchange='handlePickTime' data-date-and-time-index='{{dateAndTimeIndex}}'>
+    <view class="weui-cell weui-cell_link">
+      <view class="weui-cell__bd">添加时间段</view>
+    </view>
+  </picker>
+</template>

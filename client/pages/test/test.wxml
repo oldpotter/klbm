@@ -1,0 +1,7 @@
+<view class='container'>
+  <view wx:for='{{items}}'>{{item}}</view>
+</view>
+
+<view class='bottom-btn-container'>
+  <button type='primary'>点我</button>
+</view>

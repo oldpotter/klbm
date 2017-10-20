@@ -1,0 +1,14 @@
+<view class='page'>
+
+  <view class='page__hd'>
+    <view class='page__title'>确定要取消报名吗</view>
+    <view class='page__desc'>取消报名后，付款信息也会被删除</view>
+  </view>
+
+  <view class='page__bd'>
+    <view class='page__bd_spacing' style='padding-top: 50rpx'>
+      <button class='weui-btn' type='warn' bindtap='handleCancel'>取消报名</button>
+      <button class='weui-btn' type='default' bindtap='handleBack'>返回</button>
+    </view>
+  </view>
+</view>

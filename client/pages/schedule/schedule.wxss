@@ -1,0 +1,7 @@
+/* pages/schedule/schedule.wxss */
+
+.timeBlocksContainer{
+	padding-top: 10rpx
+}
+
+

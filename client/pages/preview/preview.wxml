@@ -1,0 +1,41 @@
+<import src='../../views/add_time_block_cell.wxml' />
+<import src='../../views/time_block_cell.wxml' />
+
+<view class='page'>
+
+  <view class="page__hd">
+    <view class="page__title">{{props.schedule.title}}</view>
+    <view class="page__desc">{{props.schedule.description}}</view>
+  </view>
+
+  <view class='page__bd'>
+		<!-- 报名说明 -->
+    <view wx:if='{{props.schedule.maxApplyQuantity!="0"}}' class='weui-cells__title'>每人限报
+      <text style='color:red'>{{props.schedule.maxApplyQuantity}}</text>个时间段
+    </view>
+		<view class='weui-cells__title'>长按单元格删除时间段</view>
+    <!-- 列表 -->
+    <view class='weui-cells' wx:for='{{props.schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
+      <!-- 日期 -->
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{dateAndTime.date}}</view>
+      </view>
+      <!-- 时间段 -->
+      <view class='weui-cell weui-cell_select' style='justify-content: space-between;padding-left: 50rpx' wx:for='{{dateAndTime.timeBlocks}}' wx:key='start' wx:for-item='timeBlock' wx:for-index='timeBlockIndex' bindlongpress='handleLongPressTimeBlock' data-time-block-index='{{timeBlockIndex}}'
+        data-date-and-time-index='{{dateAndTimeIndex}}'>
+        <template is='time-block-cell' data='{{dateAndTimeIndex,timeBlockIndex,...timeBlock}}' />
+      </view>
+      <!-- 添加时间段 -->
+      <template is='add-time-block-cell' data='{{dateAndTimeIndex,timeBlockIndex,...timeBlock}}' />
+    </view>
+
+    <view class='page__bd_spacing' style='padding-top:50rpx'>
+      <!-- 按钮 -->
+      <button class='weui-btn' type='primary' bindtap="handleOKBtnTap">保存</button>
+      <button wx:if='{{props.action==="edit"}}' class='weui-btn' type='warn' bindtap="handleDeleteBtnTap">删除</button>
+      <button class='weui-btn' type='default' bindtap="handleBackBtnTap">返回</button>
+    </view>
+
+  </view>
+
+</view>

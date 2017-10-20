@@ -1,0 +1,3 @@
+<import src='../../views/operation_result_view.wxml' />
+
+<template is='operation-result-view' data='{{...store}}' />

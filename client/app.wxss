@@ -1,0 +1,12 @@
+/**app.wxss**/
+@import '/plugins/weui-wxss/dist/app.wxss';
+@import '/plugins/zanui-weapp/dist/index.wxss';
+
+.bottom-btn-container {
+  padding: 20rpx 40rpx;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  box-sizing: border-box;
+  background: #f0f0f0;
+}

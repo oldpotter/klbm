@@ -1,0 +1,77 @@
+{
+	"client": "./client",
+	"svr": "./server",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true
+	},
+	"libVersion": "1.5.0",
+	"appid": "wx0a402a0154166169",
+	"projectname": "klbaoming",
+	"condition": {
+		"weapp": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "测试页",
+					"pathName": "pages/test/test",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": 1,
+					"name": "form页面",
+					"pathName": "pages/form/form",
+					"query": "isOwner=0&isFromNative=0&scheduleId=56",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群1",
+						"shareName": "t1023-CVwWs71Ty8P1hSj5V2wf-7vm4boBXxA-mE5CI@cr4dev",
+						"shareKey": "O7lkcry2I5jr0RFytoixmrm_LpU07gonD7O7FHMfYvbpvNybEDWB0qhR38g2K6qmWuKKWdURYFjzjvLW5nCESg~~"
+					}
+				},
+				{
+					"id": -1,
+					"name": "计划列表",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群1",
+						"shareName": "t1023-CVwWs71Ty8P1hSj5V2wf-7vm4boBXxA-mE5CI@cr4dev",
+						"shareKey": "O7lkcry2I5jr0RFytoixmrm_LpU07gonD7O7FHMfYvbpvNybEDWB0qhR38g2K6qmWuKKWdURYFjzjvLW5nCESg~~"
+					}
+				},
+				{
+					"id": -1,
+					"name": "me",
+					"pathName": "pages/me/me",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "我发起的",
+					"pathName": "pages/list/list",
+					"query": "index=0",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群1",
+						"shareName": "t1023-CVwWs71Ty8P1hSj5V2wf-7vm4boBXxA-mE5CI@cr4dev",
+						"shareKey": "O7lkcry2I5jr0RFytoixmrm_LpU07gonD7O7FHMfYvbpvNybEDWB0qhR38g2K6qmWuKKWdURYFjzjvLW5nCESg~~"
+					}
+				}
+			]
+		},
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		}
+	}
+}

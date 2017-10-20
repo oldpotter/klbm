@@ -1,0 +1,245 @@
+<import src="../../plugins/zanui-weapp/dist/toptips/index.wxml" />
+
+<view class='page'>
+  <!-- 标题和描述 -->
+  <view class='page__hd'>
+    <view class='page__title'>{{props.schedule.title}}</view>
+    <view class='page__desc'>{{props.schedule.description}}</view>
+    <!-- 报名说明 -->
+    <view wx:if='{{props.schedule.maxApplyQuantity!=0}}' class="page__desc">每人限报
+      <text style='color:red'>{{props.schedule.maxApplyQuantity}}</text>个时间段
+    </view>
+    <view class='page__desc'>
+      <image src='../../resources/payment_card.png' mode='aspectFit' style="width: 32rpx; height: 32rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+      表示已付款
+    </view>
+  </view>
+
+
+  <view class='page__bd' style='margin-bottom:200rpx;'>
+
+    <!-- navBar -->
+    <view class="weui-tab">
+
+      <!-- navBar头部 -->
+      <view class="weui-navbar">
+        <!-- 标题 -->
+        <block wx:for="{{props.tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{props.activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <!-- 滑动块 -->
+        <view class="weui-navbar__slider" style="left: {{props.sliderLeft}}px; transform: translateX({{props.sliderOffset}}px); -webkit-transform: translateX({{props.sliderOffset}}px);"></view>
+      </view>
+
+      <!-- navBar 报名列表 -->
+      <view class="weui-tab__panel">
+
+        <!-- 管理员页 -->
+        <block wx:if='{{props.isOwner == true}}'>
+          <!-- 全部tab -->
+          <view class="weui-tab__content" hidden="{{props.activeIndex != 0}}">
+            <view class='weui-cells' wx:for='{{props.schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
+
+              <!-- 日期 -->
+              <view class="weui-cell">
+                <view class="weui-cell__bd">{{dateAndTime.date}}</view>
+              </view>
+
+              <!-- 时间段 -->
+              <label bindtap='clickCell' class="weui-cell weui-check__label" wx:for="{{dateAndTime.timeBlocks}}" wx:key='start' wx:for-item='timeBlock' wx:for-index='timeBlockIndex' data-date-and-time-index='{{dateAndTimeIndex}}' data-time-block-index='{{timeBlockIndex}}'>
+
+                <!-- 时间 -->
+                <view class="weui-cell__bd">{{timeBlock.start}}--{{timeBlock.end}}</view>
+                <!-- 付款图标 -->
+                <image wx:if='{{timeBlock.userInfo.paid==true}}' src='../../resources/payment_card.png' mode='aspectFit' style="width: 32rpx; height: 32rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+                <!-- 头像 -->
+                <image wx:if='{{timeBlock.userInfo != null}}' src="{{timeBlock.userInfo.avatarUrl}}" mode='aspectFit' style="width: 90rpx; height: 90rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+                <!-- 名字 -->
+                <view class='weui-cell__hd' wx:if='{{timeBlock.userInfo != null}}'>{{timeBlock.userInfo.nickName}}</view>
+                <!-- 箭头 -->
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </label>
+            </view>
+          </view>
+
+          <!-- 已报名 -->
+          <view class="weui-tab__content" hidden="{{props.activeIndex != 1}}">
+            <view class='weui-cells' wx:for='{{props.schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
+
+              <!-- 日期 -->
+              <view class="weui-cell">
+                <view class="weui-cell__bd">{{dateAndTime.date}}</view>
+              </view>
+
+              <!-- 时间段 -->
+              <label bindtap='clickCell' class="weui-cell weui-check__label" wx:for="{{dateAndTime.timeBlocks}}" wx:key='start' wx:for-item='timeBlock' wx:for-index='timeBlockIndex' data-date-and-time-index='{{dateAndTimeIndex}}' data-time-block-index='{{timeBlockIndex}}'
+                wx:if='{{timeBlock.userInfo != null}}'>
+
+                <!-- 时间 -->
+                <view class="weui-cell__bd">{{timeBlock.start}}--{{timeBlock.end}}</view>
+                <!-- 付款图标 -->
+                <image wx:if='{{timeBlock.userInfo.paid==true}}' src='../../resources/payment_card.png' mode='aspectFit' style="width: 32rpx; height: 32rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+                <!-- 头像 -->
+                <image wx:if='{{timeBlock.userInfo != null}}' src="{{timeBlock.userInfo.avatarUrl}}" mode='aspectFit' style="width: 90rpx; height: 90rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+                <!-- 名字 -->
+                <view class='weui-cell__hd' wx:if='{{timeBlock.userInfo != null}}'>{{timeBlock.userInfo.nickName}}</view>
+                <!-- 箭头 -->
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </label>
+            </view>
+          </view>
+
+          <!-- 已付款 -->
+          <view class="weui-tab__content" hidden="{{props.activeIndex != 2}}">
+            <view class='weui-cells' wx:for='{{props.schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
+
+              <!-- 日期 -->
+              <view class="weui-cell">
+                <view class="weui-cell__bd">{{dateAndTime.date}}</view>
+              </view>
+
+              <!-- 时间段 -->
+              <label bindtap='clickCell' class="weui-cell weui-check__label" wx:for="{{dateAndTime.timeBlocks}}" wx:key='start' wx:for-item='timeBlock' wx:for-index='timeBlockIndex' data-date-and-time-index='{{dateAndTimeIndex}}' data-time-block-index='{{timeBlockIndex}}'
+                wx:if='{{timeBlock.userInfo.paid == true}}'>
+
+                <!-- 时间 -->
+                <view class="weui-cell__bd">{{timeBlock.start}}--{{timeBlock.end}}</view>
+                <!-- 付款图标 -->
+                <image wx:if='{{timeBlock.userInfo.paid==true}}' src='../../resources/payment_card.png' mode='aspectFit' style="width: 32rpx; height: 32rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+                <!-- 头像 -->
+                <image wx:if='{{timeBlock.userInfo != null}}' src="{{timeBlock.userInfo.avatarUrl}}" mode='aspectFit' style="width: 90rpx; height: 90rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+                <!-- 名字 -->
+                <view class='weui-cell__hd' wx:if='{{timeBlock.userInfo != null}}'>{{timeBlock.userInfo.nickName}}</view>
+                <!-- 箭头 -->
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </label>
+            </view>
+          </view>
+
+        </block>
+
+        <!-- 用户页 -->
+        <block wx:else>
+          <!-- 全部tab -->
+          <view class="weui-tab__content" hidden="{{props.activeIndex != 0}}">
+            <!-- 列表 -->
+            <checkbox-group bindchange="handleClickCheckbox">
+              <view class='weui-cells' wx:for='{{props.schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
+
+                <!-- 日期 -->
+                <view class="weui-cell">
+                  <view class="weui-cell__bd">{{dateAndTime.date}}</view>
+                </view>
+
+                <!-- 时间段 -->
+                <label class="weui-cell weui-check__label" wx:for="{{dateAndTime.timeBlocks}}" wx:key='start' wx:for-item='timeBlock' wx:for-index='timeBlockIndex'>
+                  <!-- checkbox -->
+                  <checkbox class="weui-check" value='{{dateAndTimeIndex}},{{timeBlockIndex}}' checked="{{timeBlock.checked}}" disabled='{{timeBlock.userInfo != null}}' />
+                  <!-- checkbox 图片 -->
+                  <view class="weui-cell__hd weui-check__hd_in-checkbox" wx:if='{{timeBlock.userInfo == null}}'>
+                    <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!timeBlock.checked}}"></icon>
+                    <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{timeBlock.checked}}"></icon>
+                  </view>
+                  <!-- 时间 -->
+                  <view class="weui-cell__bd">{{timeBlock.start}}--{{timeBlock.end}}</view>
+                  <!-- 头像 -->
+                  <image wx:if='{{timeBlock.userInfo != null}}' src="{{timeBlock.userInfo.avatarUrl}}" mode='aspectFit' style="width: 90rpx; height: 90rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+                  <!-- 名字 -->
+                  <view class='weui-cell__hd' wx:if='{{timeBlock.userInfo != null}}'>{{timeBlock.userInfo.nickName}}</view>
+                  <!-- 取消报名  -->
+                  <!-- <view wx:if='{{timeBlock.userInfo != null}}' class='weui-agree__link' style='margin-left:30rpx'>取消</view> -->
+                </label>
+              </view>
+            </checkbox-group>
+          </view>
+
+          <!-- 可报名tab -->
+          <view class="weui-tab__content" hidden="{{props.activeIndex != 1}}">
+
+            <!-- 列表 -->
+            <checkbox-group bindchange="handleClickCheckbox">
+
+              <view class='weui-cells' wx:for='{{props.schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
+                <!-- 日期 -->
+                <view class="weui-cell">
+                  <view class="weui-cell__bd">{{dateAndTime.date}}</view>
+                </view>
+
+                <!-- 时间段 -->
+                <label class="weui-cell weui-check__label" wx:for="{{dateAndTime.timeBlocks}}" wx:key='start' wx:for-item='timeBlock' wx:for-index='timeBlockIndex' wx:if='{{!timeBlock.userInfo}}'>
+                  <!-- checkbox -->
+                  <checkbox class="weui-check" value='{{dateAndTimeIndex}},{{timeBlockIndex}}' checked="{{timeBlock.checked}}" disabled='{{timeBlock.userInfo != null}}' />
+                  <!-- checkbox 图片 -->
+                  <view class="weui-cell__hd weui-check__hd_in-checkbox" wx:if='{{timeBlock.userInfo == null}}'>
+                    <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!timeBlock.checked}}"></icon>
+                    <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{timeBlock.checked}}"></icon>
+                  </view>
+                  <!-- 时间 -->
+                  <view class="weui-cell__bd">{{timeBlock.start}}--{{timeBlock.end}}</view>
+                  <!-- 头像 -->
+                  <image wx:if='{{timeBlock.userInfo != null}}' src="{{timeBlock.userInfo.avatarUrl}}" mode='aspectFit' style="width: 90rpx; height: 90rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+                  <!-- 名字 -->
+                  <view class='weui-cell__hd' wx:if='{{timeBlock.userInfo != null}}'>{{timeBlock.userInfo.nickName}}</view>
+                </label>
+
+              </view>
+            </checkbox-group>
+
+          </view>
+
+          <!-- 已报名tab -->
+          <view class="weui-tab__content" hidden="{{props.activeIndex != 2}}">
+            <!-- 列表 -->
+            <checkbox-group bindchange="handleClickCheckbox">
+
+              <view class='weui-cells' wx:for='{{props.schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
+                <!-- 日期 -->
+                <view class="weui-cell">
+                  <view class="weui-cell__bd">{{dateAndTime.date}}</view>
+                </view>
+
+                <!-- 时间段 -->
+                <label class="weui-cell weui-check__label" wx:for="{{dateAndTime.timeBlocks}}" wx:key='start' wx:for-item='timeBlock' wx:for-index='timeBlockIndex' wx:if='{{timeBlock.userInfo}}'>
+                  <!-- checkbox -->
+                  <checkbox class="weui-check" value='{{dateAndTimeIndex}},{{timeBlockIndex}}' checked="{{timeBlock.checked}}" disabled='{{timeBlock.userInfo != null}}' />
+                  <!-- checkbox 图片 -->
+                  <view class="weui-cell__hd weui-check__hd_in-checkbox" wx:if='{{timeBlock.userInfo == null}}'>
+                    <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!timeBlock.checked}}"></icon>
+                    <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{timeBlock.checked}}"></icon>
+                  </view>
+                  <!-- 时间 -->
+                  <view class="weui-cell__bd">{{timeBlock.start}}--{{timeBlock.end}}</view>
+                  <!-- 头像 -->
+                  <image wx:if='{{timeBlock.userInfo != null}}' src="{{timeBlock.userInfo.avatarUrl}}" mode='aspectFit' style="width: 90rpx; height: 90rpx; background-color: #eeeeee; margin-right:20rpx"></image>
+                  <!-- 名字 -->
+                  <view class='weui-cell__hd' wx:if='{{timeBlock.userInfo != null}}'>{{timeBlock.userInfo.nickName}}</view>
+                </label>
+
+              </view>
+            </checkbox-group>
+          </view>
+        </block>
+
+      </view>
+
+    </view>
+
+  </view>
+
+  <!-- 按钮 -->
+  <view class='bottom-btn-container'>
+    <!-- 报名 -->
+    <button wx:if='{{props.isOwner == 0}}' type='primary' bindtap='apply'>报名</button>
+    <!-- 分享 -->
+    <button style='margin-top:15rpx;' type='{{props.isOwner == true ? "primary" : "default"}}' open-type='share'>分享</button>
+    <!-- 返回 -->
+    <button style='margin-top:15rpx;' wx:if='{{props.isOwner == true}}' type='default' bindtap='goBack'>返回</button>
+  </view>
+
+</view>
+
+
+<!-- 错误提示 -->
+<template is="zan-toptips" data="{{ zanTopTips }}"></template>

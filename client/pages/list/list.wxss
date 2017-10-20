@@ -1,0 +1,40 @@
+/* pages/list/list.wxss */
+
+.list {
+  margin-bottom: 100rpx;
+}
+
+.cell {
+  border-top: 1rpx solid lightgray;
+  border-bottom: 1rpx solid lightgray;
+  margin-bottom: 20rpx;
+  background: white;
+  padding: 30rpx;
+}
+
+.cell_active {
+  background: lightgray;
+}
+
+.title {
+  margin: auto 30rpx;
+  font-size: 16px;
+  min-width: 95%;
+  border-bottom: 1rpx solid lightgray;
+}
+
+.desc {
+  margin: 15rpx 30rpx;
+  font-size: 13px;
+  color: lightgray;
+}
+
+.btn-left {
+	margin: 30rpx 0 0 30rpx;
+}
+
+
+.btn-right {
+	float: right;
+  margin: 30rpx 30rpx 0 30rpx;
+}
