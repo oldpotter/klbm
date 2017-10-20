@@ -123,7 +123,7 @@ Page(Object.assign({}, Zan.Quantity, observer({
 		let schedule = new scheduleStore(this.props.store.title, this.props.store.description, this.props.store.dateStart, this.props.store.dateEnd)
 		schedule.maxApplyQuantity = this.props.store.maxApplyQuantity
 		for (let i = 0; i <= count; i++) {
-			let date = moment(this.props.dateStart).add(i, 'd').format('YYYY-MM-DD')
+			let date = moment(this.props.store.dateStart).add(i, 'd').format('YYYY-MM-DD')
 			let dateAndTime = new dateAndTimeStore(date)
 			this.props.store.getObservableTimeBlocks().forEach((tb) => dateAndTime.timeBlocks.push(tb))
 			schedule.dateAndTimes.push(dateAndTime)
