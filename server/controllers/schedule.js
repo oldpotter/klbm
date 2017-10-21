@@ -36,8 +36,6 @@ async function add(ctx, next) {
 //查询所有计划
 async function all(ctx, next) {
 	await mysql.select().from('schedule')
-<<<<<<< Updated upstream
-=======
 		.then(res => {
 			ctx.state.data = res
 		})
@@ -52,7 +50,6 @@ async function allOwn(ctx, next) {
 	await mysql.select().from('schedule')
 		.whereRaw('detail->"$.ownerOpenId" = ?', [openId])
 		.orderBy('id', 'desc')
->>>>>>> Stashed changes
 		.then(res => {
 			ctx.state.data = res
 		})
@@ -87,6 +84,7 @@ async function edit(ctx, next) {
 async function apply(ctx, next) {
 	let { schedule, checkItems } = ctx.request.body
 	const _this = this
+	let resultId
 	await mysql('schedule')
 		.where('id', schedule.id)
 		.select()
@@ -101,13 +99,16 @@ async function apply(ctx, next) {
 				if (!valid) {
 					throw new Error(errorCodes.APPLY_FAIL)
 				}
-				return mysql('schedule').where('id', schedule.id).update('detail', JSON.stringify(schedule))
+				return mysql('schedule').where('id', schedule.id).update('detail', JSON.stringify(schedule)).then(res => resultId = res[0])
 			} catch (err) {
 				throw new Error(errorCodes.OTHER_ERROR)
 			}
 
 		})
-		.then(() => ctx.state.code = 0)
+		.then(() => {
+			ctx.state.code = 0
+			ctx.state.data = resultId
+		})
 		.catch(err => {
 			ctx.state.code = err.message
 		})

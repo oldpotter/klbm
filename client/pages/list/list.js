@@ -46,19 +46,6 @@ Page({
 	},
 
 
-	//点击一个计划
-	// onClickCell(event) {
-	// 	const index = event.currentTarget.dataset.index
-	// 	if (this.data.index == 0) {//修改计划
-	// 		app.schedule = this.data.schedules[index]
-	// 		wx.navigateTo({
-	// 			url: `../preview/preview?action=edit&index=${index}`,
-	// 		})
-	// 	} else {//修改报名
-
-	// 	}
-	// },
-
 	//编辑计划
 	onEdit(event) {
 		const index = event.currentTarget.dataset.index

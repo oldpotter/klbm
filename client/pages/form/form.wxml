@@ -37,7 +37,7 @@
       <view class="weui-tab__panel">
 
         <!-- 管理员页 -->
-        <block wx:if='{{props.isOwner == true}}'>
+        <block wx:if='{{props.isFromNative == true}}'>
           <!-- 全部tab -->
           <view class="weui-tab__content" hidden="{{props.activeIndex != 0}}">
             <view class='weui-cells' wx:for='{{props.schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
@@ -231,11 +231,11 @@
   <!-- 按钮 -->
   <view class='bottom-btn-container'>
     <!-- 报名 -->
-    <button wx:if='{{props.isOwner == 0}}' type='primary' bindtap='apply'>报名</button>
+    <button wx:if='{{props.isFromNative == 0}}' type='primary' bindtap='apply'>报名</button>
     <!-- 分享 -->
-    <button style='margin-top:15rpx;' type='{{props.isOwner == true ? "primary" : "default"}}' open-type='share'>分享</button>
+    <button style='margin-top:15rpx;' type='{{props.isFromNative == true ? "primary" : "default"}}' open-type='share'>分享</button>
     <!-- 返回 -->
-    <button style='margin-top:15rpx;' wx:if='{{props.isOwner == true}}' type='default' bindtap='goBack'>返回</button>
+    <button style='margin-top:15rpx;' wx:if='{{props.isFromNative == true}}' type='default' bindtap='goBack'>返回</button>
   </view>
 
 </view>

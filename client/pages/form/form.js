@@ -33,7 +33,7 @@ Page(Object.assign({}, Zan.TopTips, observer({
 	onLoad(options) {
 		this.props.isOwner = options.isOwner
 		this.props.isFromNative = options.isFromNative
-		this.props.tabs = this.props.Owner == true ? ['全部', '可报名', '已报名'] : ['全部', '已报名', '已付款']
+		this.props.tabs = this.props.isFromNative != true ? ['全部', '可报名', '已报名'] : ['全部', '已报名', '已付款']
 		this.props.scheduleId = options.scheduleId
 		this.props.schedule = app.schedule
 
@@ -193,6 +193,7 @@ Page(Object.assign({}, Zan.TopTips, observer({
 				_this.props.schedule.dateAndTimes.forEach(dateAndTime => {
 					dateAndTime.timeBlocks.forEach(timeBlock => {
 						if (timeBlock.checked && !timeBlock.userInfo) {
+							// console.log('dateAndTime:',dateAndTime)
 							timeBlock.userInfo = new userInfoStore()
 							timeBlock.userInfo.nickName = userInfo.nickName
 							timeBlock.userInfo.avatarUrl = userInfo.avatarUrl

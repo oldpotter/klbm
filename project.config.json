@@ -25,7 +25,7 @@
 					"id": 1,
 					"name": "form页面",
 					"pathName": "pages/form/form",
-					"query": "isOwner=0&isFromNative=0&scheduleId=56",
+					"query": "isOwner=0&isFromNative=0&scheduleId=60",
 					"scene": "1044",
 					"shareInfo": {
 						"groupName": "测试模拟群1",

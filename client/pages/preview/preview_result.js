@@ -34,7 +34,7 @@ Page({
 	 */
 	goToForm(){
 		wx.redirectTo({
-			url: `../form/form?isOwner=1&scheduleId=${app.schedule.id}`,
+			url: `../form/form?isFromNative=1&scheduleId=${app.schedule.id}`,
 		})
 	}
 

@@ -15,7 +15,7 @@ Page({
 	data: {
 		listItems: [
 			new listItem('我发起的'),
-			new listItem('我参与的'),
+			// new listItem('我参与的'),
 		],
 		userInfo: undefined
 	},
