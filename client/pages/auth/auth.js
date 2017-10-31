@@ -49,6 +49,7 @@ Page(Object.assign({}, Zan.TopTips, observer({
 		util.pLoading('正在登录')
 			.then(() => util.pRequest(config.service.adminLoginUrl, user, 'POST'))
 			.then(res => {
+				console.log(res)
 				wx.hideLoading()
 				const code = res.data.code
 				if (code == STATE_CODES.LOGIN_SUCCESS) {
@@ -60,6 +61,7 @@ Page(Object.assign({}, Zan.TopTips, observer({
 				}
 			})
 			.catch(err => {
+				console.error(err)
 				wx.hideLoading()
 				_this.showZanTopTips(`登录失败:${err}`);
 			})

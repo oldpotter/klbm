@@ -1,18 +1,31 @@
-const mysql = require('./mysql')('schedule')
+const DB = require('./mysql')('baoming')
+const fs = require('fs')
+const path = require('path')
+const { mysql: config } = require('../config')
+
 
 console.log('开始修改数据库...')
+const INIT_DB_FILE = path.join(__dirname, './baoming.sql')
 
-//增加schedule maxApplyQuantity字段
+
+console.log(`准备读取 SQL 文件：${INIT_DB_FILE}`)
+
+const content = fs.readFileSync(INIT_DB_FILE, 'utf8')
+
+console.log('开始执行 SQL 文件...')
+
+DB.raw(content).then(res => {
+	console.log('SQL执行成功')
+}, err => {
+	throw new Error(err)
+})
+
+
+/*
 mysql('schedule').select()
 	.then(res => {
 		return res.map(schedule => {
 			let detail = JSON.parse(schedule.detail)
-			// detail.dateAndTimes.forEach(dateAndTime => {
-			// 	dateAndTime.timeBlocks.forEach(timeBlock => {
-			// 		timeBlock.nickName = null
-			// 		timeBlock.avatarUrl = null
-			// 	})
-			// })
 			detail.maxApplyQuantity = 0
 			schedule.detail = detail
 			return schedule
@@ -28,3 +41,4 @@ mysql('schedule').select()
 	})
 	.then(() => console.log('修复数据库结束...'))
 
+*/

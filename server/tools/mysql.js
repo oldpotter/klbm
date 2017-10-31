@@ -2,7 +2,7 @@ const config = require('../config')
 module.exports = (database) => require('knex')({
 	client: 'mysql',
 	connection: {
-		host: '127.0.0.1',
+		host: config.mysql.host,
 		user: 'root',
 		password: config.mysql.pass,
 		database: database

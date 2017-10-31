@@ -52,6 +52,7 @@ Page(Object.assign({}, Zan.TopTips, observer({
 
 	onShow() {
 		if (this.props.isFromNative == false) {//从网络进入页
+			console.log('request data...')
 			const _this = this
 			if (wx.startPullDownRefresh) {
 				wx.startPullDownRefresh({
@@ -124,7 +125,7 @@ Page(Object.assign({}, Zan.TopTips, observer({
 		const _this = this
 		return {
 			title: `${_this.props.schedule.title}`,
-			path: `/pages/form/form?isOwner=0isFromNative=0&scheduleId=${_this.props.schedule.id}`,
+			path: `/pages/form/form?isOwner=0&isFromNative=0&scheduleId=${_this.props.schedule.id}`,
 			success(res) {
 				app.resultModel = new ResultModel(
 					'success',

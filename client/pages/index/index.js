@@ -67,6 +67,7 @@ Page(observer({
 		util.pLoading('从远程获取数据...')
 			.then(() => util.pRequest(config.service.allSchedulesUrl))
 			.then(res => {
+				console.log(res)
 				_this.props.schedules = res.data.data.map(obj => {
 					obj.detail = JSON.parse(obj.detail)
 					obj.detail.id = obj.id
