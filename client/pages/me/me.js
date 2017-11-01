@@ -1,10 +1,6 @@
-/**
- * 主页
- * 
- */
-
 const app = getApp()
 const qcloud = require('../../plugins/wafer2-client-sdk/index')
+
 class listItem {
 	constructor(title) {
 		this.title = title
@@ -14,8 +10,8 @@ class listItem {
 Page({
 	data: {
 		listItems: [
-			new listItem('我发起的'),
-			// new listItem('我参与的'),
+			new listItem('发起的报名'),
+			new listItem('参与的报名'),
 		],
 		userInfo: undefined
 	},
@@ -47,9 +43,9 @@ Page({
 	},
 
 	onClickCell(event) {
-		const index = event.currentTarget.dataset.index
+		const flag = event.currentTarget.dataset.index
 		wx.navigateTo({
-			url: `../list/list?index=${index}`,
+			url: `../list/list?flag=${flag}`,
 		})
 	}
 })

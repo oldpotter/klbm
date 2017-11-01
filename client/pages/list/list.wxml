@@ -1,7 +1,9 @@
 <!--pages/list/list.wxml-->
+<import src='../../plugins/zanui-weapp/dist/toptips/index.wxml' />
+<template is='zan-toptips' data='{{zanTopTips}}' />
 <view class='page'>
   <view class='page__hd'>
-    <view class='page__title'>{{index==0?'我发起的':'我参与的'}}</view>
+    <view class='page__title'>{{index==0?'发起的报名':'参与的报名'}}</view>
   </view>
 
   <view class='page__bd'>
@@ -11,10 +13,11 @@
         <view class='cell'>
           <view class='title'>{{item.title}}</view>
           <view class='desc'>{{item.description}}</view>
-          <button class='btn-left' size='mini' type='default' bindtap='onEdit' data-index='{{index}}'>编辑计划</button>
-          <button class='btn-right' size='mini' type='primary' bindtap='onLook' data-index='{{index}}'>查看报名</button>
+          <button wx:if='{{flag==0}}' class='btn-left' size='mini' type='default' bindtap='onEdit' data-index='{{index}}'>编辑计划</button>
+          <button wx:if='{{flag==0}}' class='btn-right' size='mini' type='primary' bindtap='onLook' data-index='{{index}}'>查看报名</button>
         </view>
       </block>
+
     </view>
 
     <!-- 新建计划按钮 -->

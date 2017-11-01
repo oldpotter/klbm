@@ -51,6 +51,7 @@ async function allOwn(ctx, next) {
 		.whereRaw('detail->"$.ownerOpenId" = ?', [openId])
 		.orderBy('id', 'desc')
 		.then(res => {
+			ctx.state.code = 0
 			ctx.state.data = res
 		})
 		.catch(err => {
@@ -60,7 +61,29 @@ async function allOwn(ctx, next) {
 
 //所有参加的计划
 async function allJoin(ctx, next) {
-
+	const { openId } = ctx.request.body
+	await mysql.select().from('schedule')
+		.orderBy('id', 'desc')
+		.then(schedules => {
+			ctx.state.code = 0
+			if (schedules.length > 0) {
+				let count = 0
+				return schedules.filter(schedule => {
+					let detail = JSON.parse(schedule.detail)
+					return detail.dateAndTimes.some(dateAndTime => {
+						return dateAndTime.timeBlocks.some(timeBlock => {
+							return timeBlock.userInfo && timeBlock.userInfo.openId && timeBlock.userInfo.openId == openId
+						})
+					})
+				})
+			}
+			return []
+		})
+		.then(res => ctx.state.data = res)
+		.catch(err => {
+			console.error(`获取所有参加的计划失败：${err}`)
+			ctx.state.code = -1
+		})
 }
 
 //修改一个计划

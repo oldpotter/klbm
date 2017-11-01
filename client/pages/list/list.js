@@ -1,20 +1,21 @@
 const config = require('../../config')
 const utils = require('../../utils/utils')
 const app = getApp()
-Page({
+const Zan = require('../../plugins/zanui-weapp/dist/index.js')
+Page(Object.assign({}, Zan.TopTips, {
 	data: {
 		/**
 		 * 0:发起的列表
 		 * 1:参加的列表
 		 */
-		index: undefined,
+		flag: undefined,
 		schedules: undefined,
 	},
 
 	onLoad(options) {
 		//获取页面类型
 		this.setData({
-			index: options.index
+			flag: options.flag
 		})
 
 		this.getSchedules()
@@ -27,17 +28,21 @@ Page({
 			title: '正在获取数据...',
 		})
 		wx.request({
-			url: _this.data.index == 0 ? config.service.schedulesOwnUrl : config.service.schedulesJoinUrl,
+			url: _this.data.flag == 0 ? config.service.schedulesOwnUrl : config.service.schedulesJoinUrl,
 			data: { openId: app.userInfo.openId },
 			method: 'POST',
 			success: function (res) {
-				console.log('获取schedules成功：', res)
-				_this.setData({
-					schedules: utils.parseSchedules(res.data.data)
-				})
+				if (res.data.code == 0) {
+					console.log('获取schedules成功：', res)
+					_this.setData({
+						schedules: utils.parseSchedules(res.data.data)
+					})
+				} else {
+					_this.showZanTopTips('获取计划失败...', res.data.data)
+				}
 			},
 			fail: function (res) {
-				console.error('获取schedules失败')
+				_this.showZanTopTips('发起request失败...', res.data.data)
 			},
 			complete: function (res) {
 				wx.hideLoading()
@@ -71,4 +76,4 @@ Page({
 			url: '../schedule/schedule',
 		})
 	}
-})
+}))
