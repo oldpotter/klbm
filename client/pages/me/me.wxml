@@ -17,15 +17,6 @@
         </view>
       </block>
     </view>
-
-    <!-- <view class="weui-footer foot">
-      <view class="weui-footer__links">
-        <navigator url="" class="weui-footer__link">联系作者</navigator>
-        <navigator url="" class="weui-footer__link">捐赠作者</navigator>
-      </view>
-      <view class="weui-footer__text">Copyright © 2017 Tom.Shen</view>
-    </view> -->
-
   </view>
   <template is='foot' />
 </view>
