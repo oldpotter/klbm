@@ -1,0 +1,9 @@
+<template name='foot'>
+  <view class="weui-footer foot">
+    <view class="foot-links">
+      <contact-button></contact-button>
+      <view class="weui-footer__link child" bindtap='onPayAuthor'>捐赠作者</view>
+    </view>
+    <view class="weui-footer__text">Copyright © 2017 Tom.Shen</view>
+  </view>
+</template>

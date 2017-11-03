@@ -4,11 +4,7 @@ const app = getApp()
 const Zan = require('../../plugins/zanui-weapp/dist/index.js')
 Page(Object.assign({}, Zan.TopTips, {
 	data: {
-		/**
-		 * 0:发起的列表
-		 * 1:参加的列表
-		 */
-		flag: undefined,
+		flag: undefined,//0：发起的列表 1:参加的列表
 		schedules: undefined,
 	},
 
@@ -17,7 +13,10 @@ Page(Object.assign({}, Zan.TopTips, {
 		this.setData({
 			flag: options.flag
 		})
+	},
 
+	onShow() {
+		app.schedule = null
 		this.getSchedules()
 	},
 
@@ -56,7 +55,7 @@ Page(Object.assign({}, Zan.TopTips, {
 		const index = event.currentTarget.dataset.index
 		app.schedule = this.data.schedules[index]
 		wx.navigateTo({
-			url: `../preview/preview?action=edit&index=${index}`,
+			url: `../edit/edit?action=edit`,
 		})
 	},
 
@@ -70,10 +69,19 @@ Page(Object.assign({}, Zan.TopTips, {
 		})
 	},
 
+	//点击参与的报名计划
+	onClickCell(event) {
+		const _this = this
+		const index = event.currentTarget.dataset.index
+		wx.navigateTo({
+			url: `../form/form?isOwner=0&isFromNative=0&scheduleId=${_this.data.schedules[index].id}`,
+		})
+	},
+
 	//新建
 	onClickBtn() {
 		wx.navigateTo({
-			url: '../schedule/schedule',
+			url: '../edit/edit',
 		})
 	}
 }))

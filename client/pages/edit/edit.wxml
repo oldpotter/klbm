@@ -1,0 +1,108 @@
+<wxs src='./edit.wxs' module='edit' />
+<import src='../../views/add_time_block_cell.wxml' />
+<import src='../../views/time_block_cell.wxml' />
+<import src="../../plugins/zanui-weapp/dist/quantity/index.wxml" />
+<import src="../../plugins/zanui-weapp/dist/toptips/index.wxml" />
+
+<view class='page'>
+  <view class='page__bd'>
+    <!-- 计划标题 -->
+    <view class='weui-cells__title'>计划标题</view>
+    <view class='weui-cells weui_cells-after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__bd'>
+          <input class='weui-input' bindinput='onTitleChange' placeholder='请输入标题' value='{{title}}' />
+        </view>
+      </view>
+    </view>
+
+    <!-- 计划描述 -->
+    <view class='weui-cells__title'>计划描述</view>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>
+          <textarea class='weui-textarea' bindinput='onDescriptionChange' placeholder='请输入计划描述' style='height: 3.3em' value='{{description}}' />
+        </view>
+      </view>
+    </view>
+
+    <!-- 日期 -->
+    <view class='weui-cells__title'>日期</view>
+    <view class='weui-cells weui-cells_after-title {{action=="edit" ? "zan-label--disabled":""}}'>
+      <!-- 开始日期 -->
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__bd'>
+          <picker mode='date' value='{{dateStart}}' bindchange='onDateStartChange' disabled='{{action=="edit"}}'>
+            <view class='weui-select'>开始日期: {{dateStart}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <!-- 结束日期 -->
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__bd'>
+          <picker mode='date' value='{{dateEnd}}' bindchange='onDateEndChange' disabled='{{action=="edit"}}'>
+            <view class='weui-select'>结束日期: {{dateEnd}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+
+    <!-- 添加的日期 -->
+    <block wx:if='{{action=="edit"}}'>
+      <view class='weui-cells__title'>选择需要添加的日期</view>
+      <view class='weui-cells weui-cells_after-title'>
+        <!-- 开始日期 -->
+        <view class='weui-cell weui-cell_select'>
+          <view class='weui-cell__bd'>
+            <picker mode='date' value='{{appendDateStart}}' bindchange='onAppendDateStartChange'>
+              <view class='weui-select'>开始日期: {{appendDateStart}}</view>
+            </picker>
+          </view>
+        </view>
+
+        <!-- 结束日期 -->
+        <view class='weui-cell weui-cell_select'>
+          <view class='weui-cell__bd'>
+            <picker mode='date' value='{{appendDateEnd}}' bindchange='onAppendDateEndChange'>
+              <view class='weui-select'>结束日期: {{appendDateEnd}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </block>
+
+
+    <!-- 时间段 -->
+    <view class='weui-cells__title'>时间段</view>
+    <view class='weui-cells weui-cells_after_title'>
+      <view class='weui-cell weui-cell_select' style='padding-left: 50rpx' wx:for='{{timeBlocks}}' wx:for-item='timeBlock' wx:key='{{timeBlock.start}}' wx:for-index='timeBlockIndex' bindlongpress='onLongPressTimeBlock' data-time-block-index='{{timeBlockIndex}}'>
+        <template is='time-block-cell' data='{{timeBlockIndex,...timeBlock}}' />
+      </view>
+      <!-- 添加时间段 -->
+      <template is='add-time-block-cell' />
+    </view>
+    <view class="weui-cells__tips">长按单元格删除时间段</view>
+
+
+    <!-- 最大报名数 -->
+    <view class='weui-cells'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>每人限报时间段数量</view>
+        <view style='margin-right:10rpx'>
+          <template is="zan-quantity" data="{{ ...quantityItem, componentId: 'quantityItem' }}" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">选择0表示不限报名数量</view>
+
+    <!-- 按钮们 -->
+    <view class='page__bd_spacing' style='padding-top: 50rpx'>
+      <button class='weui-btn' type='primary' bindtap='onSave' disabled='{{!edit.isValidToSave(title,action=="edit"?appendDateStart:dateStart,action=="edit"?appendDateEnd:dateEnd,timeBlocks)}}'>保存</button>
+      <button class='weui-btn' type='default' bindtap='onPreview' disabled='{{!edit.isValidToPreview(action=="edit" ? appendDateStart:dateStart,action=="edit"?appendDateEnd:dateEnd,timeBlocks)}}'>预览</button>
+    </view>
+
+  </view>
+</view>
+<template is='zan-toptips' data='{{zanTopTips}}' />

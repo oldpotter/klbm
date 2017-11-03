@@ -1,5 +1,7 @@
 const app = getApp()
 const qcloud = require('../../plugins/wafer2-client-sdk/index')
+const foot = require('../../views/foot/index.js')
+
 
 class listItem {
 	constructor(title) {
@@ -7,7 +9,7 @@ class listItem {
 	}
 }
 
-Page({
+Page(Object.assign({}, foot, {
 	data: {
 		listItems: [
 			new listItem('发起的报名'),
@@ -48,4 +50,4 @@ Page({
 			url: `../list/list?flag=${flag}`,
 		})
 	}
-})
+}))

@@ -26,6 +26,7 @@ async function add(ctx, next) {
 				.update('detail', JSON.stringify(detail))
 		})
 		.then(() => {
+			ctx.state.code = 0
 			ctx.state.data = scheduleId
 		})
 		.catch((err) => {

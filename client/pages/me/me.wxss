@@ -1,5 +1,5 @@
 /* pages/me/me.wxss */
-
+@import '../../views/foot/index.wxss';
 .user-info {
 	position: absolute;
 	top: 20%;

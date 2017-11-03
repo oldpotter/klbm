@@ -1,0 +1,25 @@
+<import src='../../views/add_time_block_cell.wxml' />
+<import src='../../views/time_block_cell.wxml' />
+
+<view class='page'>
+
+  <view class='page__bd'>
+    <view class='weui-cells__title'>长按单元格删除时间段</view>
+    <!-- 列表 -->
+    <view class='weui-cells' wx:for='{{schedule.dateAndTimes}}' wx:key='date' wx:for-item='dateAndTime' wx:for-index='dateAndTimeIndex'>
+      <!-- 日期 -->
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{dateAndTime.date}}</view>
+      </view>
+      <!-- 时间段 -->
+      <view class='weui-cell weui-cell_select' style='justify-content: space-between;padding-left: 50rpx' wx:for='{{dateAndTime.timeBlocks}}' wx:key='start' wx:for-item='timeBlock' wx:for-index='timeBlockIndex' bindlongpress='onLongPressTimeBlock' data-time-block-index='{{timeBlockIndex}}'
+        data-date-and-time-index='{{dateAndTimeIndex}}'>
+        <template is='time-block-cell' data='{{dateAndTimeIndex,timeBlockIndex,...timeBlock}}' />
+      </view>
+      <!-- 添加时间段 -->
+      <template is='add-time-block-cell' data='{{dateAndTimeIndex,timeBlockIndex,...timeBlock}}' />
+    </view>
+
+  </view>
+
+</view>

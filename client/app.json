@@ -1,26 +1,26 @@
 {
-	"pages": [
-		"pages/me/me",
-		"pages/auth/auth",
-		"pages/index/index",
-		"pages/test/test",
-		"pages/schedule/schedule",
-		"pages/preview/preview",
-		"pages/preview/preview_result",
-		"pages/form/form_result",
-		"pages/form/form",
-		"pages/form/form_input",
-		"pages/form/form_payment",
-		"pages/form/form_cancel",
-		"pages/form/form_exchange",
-		"pages/list/list"
-	],
-	"window": {
-		"backgroundTextStyle": "dark",
-		"navigationBarBackgroundColor": "#000000",
-		"navigationBarTitleText": "KL报名",
-		"navigationBarTextStyle": "white",
-		"enablePullDownRefresh": false
-	},
-	"debug": false
+  "pages": [
+    "pages/me/me",
+    "pages/test/test",
+    "pages/schedule/schedule",
+    "pages/preview/preview",
+    "pages/preview/preview_result",
+    "pages/form/form_result",
+    "pages/form/form",
+    "pages/form/form_input",
+    "pages/form/form_payment",
+    "pages/form/form_cancel",
+    "pages/form/form_exchange",
+    "pages/list/list",
+    "pages/edit/edit",
+    "pages/edit/edit_preview"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "KL报名",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
+  },
+  "debug": false
 }

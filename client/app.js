@@ -20,7 +20,8 @@ App({
 	//用户信息
 	userInfo: null,
 	//选中的schedule(或是新增的schedule)
-	schedule: [],
+	schedule: null,
+	result:null,
 	//所有schedules 
 	//在服务器的结构是{id:(int),detail:{schedule}}
 	//本地结构{schedules}

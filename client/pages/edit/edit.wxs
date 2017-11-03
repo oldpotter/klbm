@@ -1,0 +1,13 @@
+
+var isValidToPreview = function (dateStart, dateEnd, timeBlocks) {
+	return dateStart && dateEnd && timeBlocks.length > 0
+}
+
+var isValidToSave = function (title, dateStart, dateEnd, timeBlocks) {
+	return title && dateStart && dateEnd && timeBlocks.length > 0
+}
+
+module.exports = {
+	isValidToPreview: isValidToPreview,
+	isValidToSave: isValidToSave
+}

@@ -3,25 +3,33 @@
 <template is='zan-toptips' data='{{zanTopTips}}' />
 <view class='page'>
   <view class='page__hd'>
-    <view class='page__title'>{{index==0?'发起的报名':'参与的报名'}}</view>
+    <view class='page__title'>{{flag==0?'发起的报名':'参与的报名'}}</view>
   </view>
 
   <view class='page__bd'>
 
     <view class='list'>
       <block wx:for='{{schedules}}'>
-        <view class='cell'>
+        <view wx:if='{{flag==0}}' class='cell'>
           <view class='title'>{{item.title}}</view>
           <view class='desc'>{{item.description}}</view>
-          <button wx:if='{{flag==0}}' class='btn-left' size='mini' type='default' bindtap='onEdit' data-index='{{index}}'>编辑计划</button>
-          <button wx:if='{{flag==0}}' class='btn-right' size='mini' type='primary' bindtap='onLook' data-index='{{index}}'>查看报名</button>
+          <button class='btn-left' size='mini' type='default' bindtap='onEdit' data-index='{{index}}'>编辑计划</button>
+          <button class='btn-right' size='mini' type='primary' bindtap='onLook' data-index='{{index}}'>查看报名</button>
         </view>
+
+        <view wx:else class='weui-cells'>
+          <view class='weui-cell' hover-class='weui-cell_active' bindtap='onClickCell' data-index='{{index}}'>
+            <view class='weui-cell__bd'>{{item.title}}</view>
+            <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+          </view>
+        </view>
+
       </block>
 
     </view>
 
     <!-- 新建计划按钮 -->
-    <view wx:if='{{index==0}}' class='bottom-btn-container'>
+    <view wx:if='{{flag==0}}' class='bottom-btn-container'>
       <button type='primary' bindtap='onClickBtn'>发起新的报名表</button>
     </view>
   </view>
