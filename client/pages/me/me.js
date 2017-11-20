@@ -15,7 +15,8 @@ Page(Object.assign({}, foot, {
 			new listItem('发起的报名'),
 			new listItem('参与的报名'),
 		],
-		userInfo: undefined
+		userInfo: undefined,
+		shangHidden:true,
 	},
 
 	onShow() {

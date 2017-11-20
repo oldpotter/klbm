@@ -1,11 +1,16 @@
 <template name='foot'>
   <view class="weui-footer foot">
     <view class="foot-links">
-			<text class="weui-footer">联系作者：</text>
+      <!-- <text class="weui-footer">联系作者：</text> -->
       <contact-button/>
-      <!-- <view class="weui-footer__link child" bindtap='onPayAuthor'>捐赠</view>  -->
-      <!-- <image src='../../resources/RMB.png' style='width:40rpx;height:40rpx;'></image> -->
+      <view class="weui-footer__link child" bindtap='onPayAuthor'>打赏作者</view>
+      <!-- <image src='../../resources/RMB.png' style='width:40rpx;height:40rpx;'></image>  -->
     </view>
     <view class="weui-footer__text">Copyright © 2017 Tom.Shen</view>
   </view>
+
+  <view class='shang' hidden='{{shangHidden}}'>
+    <image src='../../resources/shang.png' class='shang-img'  bindtap='onClickShang'></image>
+  </view>
+
 </template>
